@@ -22,27 +22,27 @@ if [ -e $databaseName ] ;then
 	        ;;
 	        
 		"List Tables" )
-		    source .././List_DataBases.sh
+		    source ../../List_Tables.sh
 	        ;;
 	        
 		"Insert Table" )  
-		    source .././Connect_DataBase.sh
+		    source ../../Insert_Table.sh
 		;;
 
 		"Select Table" )
-		    source .././Drop_DataBase.sh
+		    source ../../Select_Table.sh
 		;;
 		
 		"Update Table" )
-		    source .././Drop_DataBase.sh
+		    source ../../Update_Table.sh
 		;;
 		
 		"Drop Table" )
-		    source .././Drop_DataBase.sh
+		    source ../../Drop_Table.sh
 		;;
 		
 		"Delete from Table" )
-		    source .././Drop_DataBase.sh
+		    source ../../Delete_From_Database.sh
 		;;
 		
 		"Database Menu" )
