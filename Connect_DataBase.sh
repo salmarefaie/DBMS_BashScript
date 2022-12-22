@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+export LC_COLLATE=C 
+shopt -s extglob
 
 echo " --------------------- "
 echo "| Database Connection |"
@@ -6,7 +8,13 @@ echo " --------------------- "
 ls -F | grep "/"
 read -p "Enter your database name: " databaseName
 
-if [ -e $databaseName ] ;then
+
+if [[ -z $databaseName || $databaseName == [0-9]* || $databaseName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $databaseName == *" "* ]] ;then
+   echo "  ---------------------- "
+   echo "| Inavalid Databse Name |"
+   echo "  ---------------------- "
+
+elif [ -e $databaseName ] ;then
    cd ./$databaseName 
    
    echo " ------------ "
@@ -51,13 +59,16 @@ if [ -e $databaseName ] ;then
 		 echo "  -------------------- "
 		 cd ..
 		 Database_Menu;
+		 break
 	        ;;
 	esac
 
-    done
-
+    done 
 else 
-   echo " ------------------------ "
-   echo "| Database doesn't exist |"
-   echo " ------------------------ "
+      echo " ------------------------ "
+      echo "| Database doesn't exist |"
+      echo " ------------------------ "
 fi
+
+
+

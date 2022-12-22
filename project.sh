@@ -1,5 +1,6 @@
 #!/usr/bin/bash
-
+export LC_COLLATE=C 
+shopt -s extglob
 
 if [ -e "Database" ]; then
    echo " Database folder is exist "
@@ -40,7 +41,7 @@ function Database_Menu(){
 		
 		Exit )
 		 echo "  ---------------------------------- "
-		 echo " | Bye Bye from our Database Engine |";
+		 echo " | Bye Bye from our Database Engine |"
 		 echo "  ---------------------------------- "
 		 cd ..
 		 break
