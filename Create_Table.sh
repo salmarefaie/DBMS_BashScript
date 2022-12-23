@@ -90,6 +90,7 @@ done
 
 for (( i=0 ; i < $number ; i++ ))
 do 
+<<<<<<< HEAD
   echo -n ${col_name[$i]}: >> "./$tableName"_metadata""
   
 done
@@ -97,6 +98,9 @@ done
 for (( i=0 ; i < $number ; i++ ))
 do 
   echo -n ${col_datatype[$i]}: >> "./$tableName"_metadata""
+=======
+  echo -n ${col_name[$i]}:>> "./$tableName"_metadata""
+>>>>>>> ddc5f10889778aa1e2a9f9d77a24d11f19e6c8bb
   
 done
 

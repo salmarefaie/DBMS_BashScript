@@ -2,6 +2,7 @@
 export LC_COLLATE=C 
 shopt -s extglob
 
+<<<<<<< HEAD
 
 echo " --------------------- "
 echo "| Insertion Into Table|"
@@ -40,6 +41,7 @@ col_arr=($(awk -F : '
    }
 
 ' ./$insertTable"_metadata"))
+
 
 
 
