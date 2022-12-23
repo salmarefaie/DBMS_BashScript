@@ -2,7 +2,6 @@
 export LC_COLLATE=C 
 shopt -s extglob
 
-<<<<<<< HEAD
 
 echo " --------------------- "
 echo "| Insertion Into Table|"
