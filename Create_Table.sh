@@ -89,7 +89,7 @@ done
 
 for (( i=0 ; i < $number ; i++ ))
 do 
-  echo -n ${col_name[$i]} >> "./$tableName"_metadata""
+  echo -n ${col_name[$i]}:>> "./$tableName"_metadata""
   
 done
 
