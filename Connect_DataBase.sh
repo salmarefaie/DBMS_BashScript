@@ -49,7 +49,7 @@ elif [ -e $databaseName ] ;then
 		    source ../../Drop_Table.sh
 		;;
 		
-		"Delete from Table" )
+		"Delete From Table" )
 		    source ../../Delete_From_Database.sh
 		;;
 		

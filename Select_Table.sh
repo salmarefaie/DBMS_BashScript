@@ -4,30 +4,64 @@ shopt -s extglob
 
 
 
-cho " ---------------- "
+echo " ---------------- "
 echo "| Table selection|"
 echo " ---------------- "
 
 
 echo "Available tables ";
-ls -p | grep -v / | grep -v _ ;
+ls -p | grep -v / | grep -v _
 
-read -p "Enter  table you want to select from: " tableName
 
-while [[ -z $tableName || $tableName == [0-9]* || $tableName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $tableName == *" "* ]] 
+    select choice in "SelectAll" "SelectSpecificRow"  "Exit"
 do
-   read -p "Inavalid Table Name, enter another name: " tableName
+    case $choice in 
+    "SelectAll")
+        while [ true ]
+        do 
+            read -p "Enter Table Name You want to select From it: " tableName
+
+            if [[ -z $tableName || $tableName == [0-9]* || $tableName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $tableName == *" "* ]] ;then
+           
+            echo "This table doesn't Exsit !!, Please enter another name."
+            
+            elif [[ -f $tableName ]];then
+
+               sed -n '1,$p' $tableName
+                echo " "
+                break 
+            
+            else
+                echo "You Entered Invalid Table Name !!!"
+                echo "Please Try Again!!"
+            fi
+        done
+      
+    ;;
+    "SelectSpecificRow")
+
+        
+    ;;
+   
+    "Exit")
+        exit
+    ;;
+    *)
+        echo "You Entered invalid Option"
+    ;;
+    esac
+
 done
-
-
-select choice in "Select all columns" "select specific column" "select columns where condition" 
-do
-	case $choice in
-		 "Select all columns") 
-			;;
-		"select specific columns")
-
-			
-                         ;;
-		"select columns where condition") 
-			;;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
