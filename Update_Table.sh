@@ -14,11 +14,22 @@ if [[ -f $tableName ]]; then
 	{
 		if(NR==1){
 			for(i=1;i<=NF;i++){
-				if($i=="'$Column'"){var=i}else{if($i=="'$PK'"){vaa=i}}
+				if($i=="'$Column'")
+                {
+                    var=i
+                    }
+                    else
+                    {
+                        if($i=="'$PK'")
+                        {
+                            vaa=i
+                            }
+                            }
 			}
 		}
 		else{
-			if($vaa=='$PKVal'){
+			if($vaa=='$PKVal')
+            {
 				$var=":'$newValue':"
 			}
 		}
