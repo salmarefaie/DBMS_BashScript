@@ -19,42 +19,6 @@ do
 done
   
 
- for (( i=1; i <= ${col_name[*] ; i++ ))
- 
-      do
-        IFS=':' read -r -a column <<< "${lines[i]}";
-        col_name=${column[0]};
-        col_DataType=${column[1]};
-        
-     if [[ $i == 0 ]]; then
-                newRecord=$newColValue;
-            else
-                newRecord="$newRecord:$newColValue";
-            fi
-
-           echo" newRecord"
-
-
-        done
-
-
-        echo -n $newRecord
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
