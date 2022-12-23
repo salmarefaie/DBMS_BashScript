@@ -58,8 +58,8 @@ elif [ -e $databaseName ] ;then
 		 echo " | Your Database Menu |"
 		 echo "  -------------------- "
 		 cd ..
-		 Database_Menu;
 		 break
+		 Database_Menu;
 	        ;;
 	esac
 

@@ -12,6 +12,7 @@ do
    read -p "Inavalid Table Name, enter another name: " tableName
 done
 
+
 while [ $tableName = $databaseName ]
 do
    read -p "it is name of database, enter another name: " tableName
@@ -89,7 +90,13 @@ done
 
 for (( i=0 ; i < $number ; i++ ))
 do 
-  echo -n ${col_name[$i]} >> "./$tableName"_metadata""
+  echo -n ${col_name[$i]}: >> "./$tableName"_metadata""
+  
+done
+
+for (( i=0 ; i < $number ; i++ ))
+do 
+  echo -n ${col_datatype[$i]}: >> "./$tableName"_metadata""
   
 done
 
