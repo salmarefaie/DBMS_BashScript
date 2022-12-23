@@ -26,8 +26,7 @@ done
 
 numColumns=$(awk -F : '
 {
-   print NF-1
-  
+   print NF-1 
 }
 
 ' ./$insertTable"_metadata")
@@ -40,6 +39,37 @@ col_arr=($(awk -F : '
    }
 
 ' ./$insertTable"_metadata"))
+
+
+declare -a record_value
+for (( i=1 ; i <= numColumns ; i++))
+do
+  read -p "please enter ${col_arr[i-1]}: " value
+  record_value+=($value)
+done
+
+#echo ${record_value[@]}
+
+for (( i=0 ; i < numColumns ; i++ ))
+do 
+  echo -n ${record_value[$i]}: >> "./$tableName"
+done
+
+echo >> "./$tableName"
+unset record_value[@]
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
