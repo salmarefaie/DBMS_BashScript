@@ -1,54 +1,92 @@
-#!/usr/bin/bash
-export LC_COLLATE=C 
-shopt -s extglob
+echo " ----------------- "
+ececho " ----------------- "
+echo "| Table Deletion |"
+echo " ----------------- "
 
-
-echo " ---------------- "
-echo "| Table Deletion"
-echo " ---------------- "
-
-
-echo "Available tables ";
+echo " ------------- "
+echo "| Your Tables |"
+echo " ------------- "
 ls -p | grep -v / | grep -v _
 
+read -p "Enter your table name which you want to Delete from it: " DeleteTable
 
-    select choice in "DeleteAll" "DeleteSpecificRow"  "Exit"
-do
-    case $choice in 
-    "DeleteAll")
-        while [ true ]
-        do 
-            read -p "Enter Table Name You want to delete From it: " tableName
+if [[ -z $DeleteTable || $DeleteTable == [1-9]* || $DeleteTable == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $DeleteTable == *" "* ]] ;then
+   echo " -------------------- "
+   echo "| Inavalid Table Name |" 
+   echo " -------------------- "
 
-            if [[ -z $tableName || $tableName == [0-9]* || $tableName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $tableName == *" "* ]] ;then
-           
-            echo "This table doesn't Exsit !!, Please enter another name."
-            
-            elif [[ -f $tableName ]];then
+elif [ -f $DeleteTable ] ; then
+  select option in "Delete All" "Delete row" "Tables Menu"
+  do
+    case $option in 
+    "Delete All")
+        source ../../Delete_All.sh
+       ;;
+    
 
-               sed -i '1,$d' $tableName
-                echo "Content deleted"
-                break 
-            
-            else
-                echo "You Entered Invalid Table Name !!!"
-                echo "Please Try Again!!"
-            fi
-        done
-      
-    ;;
-    "DeleteSpecificRow")
 
-        
-    ;;
-   
-    "Exit")
-        exit
-    ;;
-    *)
-        echo "You Entered invalid Option"
-    ;;
+    
+    "Delete row")
+          source ../../Delete_Column.sh
+       ;;
+
+    "Tables Menu")
+       echo "  ----------------------- "
+		 echo " | Return To Tables Menu |"
+		 echo "  ----------------------- "
+		 break
+	     ;;
     esac
 
-done
+   done
+
+else
+   echo " --------------------- "
+   echo "| Table doesn't Exist |"
+   echo " --------------------- "
+fi
+ho "| Table Deletion |"
+echo " ----------------- "
+
+echo " ------------- "
+echo "| Your Tables |"
+echo " ------------- "
+ls -p | grep -v / | grep -v _
+
+read -p "Enter your table name which you want to Delete from it: " DeleteTable
+
+if [[ -z $DeleteTable || $DeleteTable == [1-9]* || $DeleteTable == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $DeleteTable == *" "* ]] ;then
+   echo " -------------------- "
+   echo "| Inavalid Table Name |" 
+   echo " -------------------- "
+
+elif [ -f $DeleteTable ] ; then
+  select option in "Delete All" "Delete row" "Tables Menu"
+  do
+    case $option in 
+    "Delete All")
+        source ../../Delete_All.sh
+       ;;
     
+
+
+    
+    "Delete row")
+          source ../../Delete_row.sh
+       ;;
+
+    "Tables Menu")
+       echo "  ----------------------- "
+		 echo " | Return To Tables Menu |"
+		 echo "  ----------------------- "
+		 break
+	     ;;
+    esac
+
+   done
+
+else
+   echo " --------------------- "
+   echo "| Table doesn't Exist |"
+   echo " --------------------- "
+fi
