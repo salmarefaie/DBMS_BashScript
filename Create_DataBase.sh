@@ -8,11 +8,24 @@ echo " -------------------"
 read -p "Enter your database name: " databaseCreateName
 
 
-while [[ -z $databaseCreateName|| $databaseCreateName == [0-9]* || $databaseCreateName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $databaseCreateName == *" "* ]] 
+while [[ -e $databaseCreateName ||-z $databaseCreateName || $databaseCreateName == [0-9]* || $databaseCreateName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $databaseCreateName == *" "* ]] 
 do
-   read -p "Inavalid Databse Name, enter another name: " databaseCreateName
+   if [ -e $databaseCreateName ] ; then
+        read -p "Databse name already exist, enter another name: " databaseCreateName
+   else    
+        read -p "Inavalid Databse Name, enter another name: " databaseCreateName
+   fi
 done
+
+mkdir $databaseCreateName
+echo " --------------------- "
+echo "| Database is created |"
+echo " --------------------- "
    
+
+
+
+<<Comment
 if [ -e $databaseCreateName ] ; then
     echo " ---------------------------- "
     echo "| Databse name already exist |" 
@@ -25,8 +38,6 @@ else
 
 fi
 
-
-<<Comment
 while [ -e $databaseCreateName]
 do
    read -p "Databse name already exist, enter another name: " databaseName

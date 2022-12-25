@@ -26,7 +26,7 @@ done
 
 numColumns=$(awk -F : '
 {
-   print NF-1 
+   print NF
 }
 
 ' ./$insertTable"_metadata")
