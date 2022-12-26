@@ -25,8 +25,8 @@ elif [ -e $databaseDelete ] ;then
 		YES )	
 		    rm -r $databaseDelete
 		    echo " --------------------- "
-                    echo "| Database is deleted |"
-                    echo " --------------------- "
+          echo "| Database is deleted |"
+          echo " --------------------- "
 		    
 		    break
 	        ;;

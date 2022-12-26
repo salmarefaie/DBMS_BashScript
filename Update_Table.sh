@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 export LC_COLLATE=C 
 shopt -s extglob
+
 echo "Available tables ";
 ls -p | grep -v / | grep -v _ ;
 read -p "Enter table Name: " tableName;

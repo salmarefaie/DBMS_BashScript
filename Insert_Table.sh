@@ -24,31 +24,30 @@ do
    read -p "Table name doesn't exist, enter another name to insert into table: " insertTable
 done
 
-numColumns=$(awk -F : '
+numColumns=$(head -1 ./$insertTable"_metadata" | awk -F : '
 {
-   print NF
+      print NF
 }
+' )
 
-' ./$insertTable"_metadata")
-
-
-col_arr=($(awk -F : '
-   { 
-   fields=split($0, arr); 
-   for (i=1;i<fields;i++) print arr[i] 
+col_arr=($(head -1 ./$insertTable"_metadata" | awk -F : '
+   {
+            fields=split($0, arr); 
+            for (i=0;i<=fields;i++) print arr[i] 
    }
 
-' ./$insertTable"_metadata"))
+' ))
 
 
 declare -a record_value
-for (( i=1 ; i <= numColumns ; i++))
+for (( i=0 ; i < numColumns ; i++))
 do
-  read -p "please enter ${col_arr[i-1]}: " value
+  read -p "please enter ${col_arr[i]}: " value
   record_value+=($value)
 done
 
-#echo ${record_value[@]}
+echo ${record_value[@]}
+
 
 for (( i=0 ; i < numColumns ; i++ ))
 do 

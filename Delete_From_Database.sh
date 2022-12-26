@@ -3,17 +3,19 @@ export LC_COLLATE=C
 shopt -s extglob
 
 
-echo " ---------------- "
-echo "| Table Deletion"
-echo " ---------------- "
+echo " -------------------------- "
+echo "| Removing Data From Table |"
+echo " -------------------------- "
 
+echo " ------------- "
+echo "| Your Tables |";
+echo " ------------- "
 
-echo "Available tables ";
 ls -p | grep -v / | grep -v _
 
-
+    
     select choice in "DeleteAll" "DeleteSpecificRow"  "Exit"
-do
+    do
     case $choice in 
     "DeleteAll")
         while [ true ]
@@ -42,13 +44,13 @@ do
         
     ;;
    
-    "Exit")
-        exit
-    ;;
-    *)
-        echo "You Entered invalid Option"
-    ;;
+    "Tables Menu")
+         echo "  ----------------------- "
+		 echo " | Return To Tables Menu |"
+		 echo "  ----------------------- "
+		 break
+	     ;;
     esac
 
-done
+    done
     
