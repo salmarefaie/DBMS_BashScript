@@ -29,9 +29,9 @@ echo " ------------------ "
 # enter num of colums and check regex for number not 0 or any thing except number
 read -p "Enter number of fields for table: " number
 
-while [[ $number == 0 || $number != +([0-9]) ]]
+while [[ $number == +([0]) || $number != +([0-9]) ]]
 do
-   if [[ $number == 0 ]] ;then
+   if [[ $number == +([0]) ]] ;then
       read -p "you should add number for columns: " number  
    else 
       read -p "invalid number, please enter number of fields: " number

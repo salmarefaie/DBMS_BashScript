@@ -3,9 +3,9 @@ export LC_COLLATE=C
 shopt -s extglob
 
 
-echo " --------------------- "
-echo "| Insertion Into Table|"
-echo " --------------------- "
+echo " ---------------------- "
+echo "| Insertion Into Table |"
+echo " ---------------------- "
 
 echo " ------------- "
 echo "| Your Tables |"
@@ -38,24 +38,35 @@ col_arr=($(head -1 ./$insertTable"_metadata" | awk -F : '
 
 ' ))
 
+col_type=($(tail -1 ./$insertTable"_metadata" | awk -F : '
+   {
+            fields=split($0, arr); 
+            for (i=0;i<=fields;i++) print arr[i] 
+   }
+
+' ))
+
+
 declare -i id
 declare -a record_value
 for (( i=0 ; i < numColumns ; i++))
 do
-  if (( $i == 0 )) ;then
-    if [ -s ./$insertTable ]; then
-      id=$id+1
-      value=$id
-      record_value+=($value)
-    else
-      id=1
-      value=$id
-      record_value+=($value)
-    fi
-  else
     read -p "please enter ${col_arr[i]}: " value
+
+    if [[ "${col_type[i]}" == "int" ]] ;then
+       until [[ $value == +([0-9]) ]]
+       do 
+         read -p " you should enter integer value ,please enter ${col_arr[i]}: " value
+       done
+    else
+       until [[ $value =~ [a-zA-Z][a-zA-Z0-9]* ]]
+       do 
+         read -p " you should enter string value ,please enter ${col_arr[i]}: " value
+       done
+    fi
+
     record_value+=($value)
-  fi
+    
 done
 
 echo ${record_value[@]}
@@ -63,7 +74,7 @@ echo ${record_value[@]}
 
 for (( i=0 ; i < numColumns ; i++ ))
 do 
-  echo -n ${record_value[$i]}: >> "./$insertTable"
+  echo -n :${record_value[$i]} >> "./$insertTable"
 done
 
 echo >> "./$insertTable"
