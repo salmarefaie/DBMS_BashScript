@@ -38,12 +38,24 @@ col_arr=($(head -1 ./$insertTable"_metadata" | awk -F : '
 
 ' ))
 
-
+declare -i id
 declare -a record_value
 for (( i=0 ; i < numColumns ; i++))
 do
-  read -p "please enter ${col_arr[i]}: " value
-  record_value+=($value)
+  if (( $i == 0 )) ;then
+    if [ -s ./$insertTable ]; then
+      id=$id+1
+      value=$id
+      record_value+=($value)
+    else
+      id=1
+      value=$id
+      record_value+=($value)
+    fi
+  else
+    read -p "please enter ${col_arr[i]}: " value
+    record_value+=($value)
+  fi
 done
 
 echo ${record_value[@]}
@@ -51,10 +63,10 @@ echo ${record_value[@]}
 
 for (( i=0 ; i < numColumns ; i++ ))
 do 
-  echo -n ${record_value[$i]}: >> "./$tableName"
+  echo -n ${record_value[$i]}: >> "./$insertTable"
 done
 
-echo >> "./$tableName"
+echo >> "./$insertTable"
 unset record_value[@]
 
 
