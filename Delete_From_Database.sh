@@ -1,56 +1,42 @@
-#!/usr/bin/bash
-export LC_COLLATE=C 
-shopt -s extglob
-
-
 echo " -------------------------- "
 echo "| Removing Data From Table |"
 echo " -------------------------- "
 
 echo " ------------- "
-echo "| Your Tables |";
+echo "| Your Tables |"
 echo " ------------- "
-
 ls -p | grep -v / | grep -v _
 
-    
-    select choice in "DeleteAll" "DeleteSpecificRow"  "Exit"
-    do
-    case $choice in 
-    "DeleteAll")
-        while [ true ]
-        do 
-            read -p "Enter Table Name You want to delete From it: " tableName
+read -p "Enter your table name which you want to Delete from it: " DeleteTable
 
-            if [[ -z $tableName || $tableName == [0-9]* || $tableName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $tableName == *" "* ]] ;then
-           
-            echo "This table doesn't Exsit !!, Please enter another name."
-            
-            elif [[ -f $tableName ]];then
+if [[ -z $DeleteTable || $DeleteTable == [1-9]* || $DeleteTable == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $DeleteTable == *" "* ]] ;then
+   echo " -------------------- "
+   echo "| Inavalid Table Name |" 
+   echo " -------------------- "
 
-               sed -i '1,$d' $tableName
-                echo "Content deleted"
-                break 
-            
-            else
-                echo "You Entered Invalid Table Name !!!"
-                echo "Please Try Again!!"
-            fi
-        done
-      
-    ;;
-    "DeleteSpecificRow")
+elif [ -f $DeleteTable ] ; then
+  select option in "Delete All" "Delete row" "Tables Menu"
+  do
+    case $option in 
+    "Delete All")
+        source ../../Delete_All.sh
+       ;;
+ 
+    "Delete row")
+          source ../../Delete_Column.sh
+       ;;
 
-        
-    ;;
-   
     "Tables Menu")
-         echo "  ----------------------- "
+       echo "  ----------------------- "
 		 echo " | Return To Tables Menu |"
 		 echo "  ----------------------- "
 		 break
 	     ;;
     esac
+   done
 
-    done
-    
+else
+   echo " --------------------- "
+   echo "| Table doesn't Exist |"
+   echo " --------------------- "
+fi
