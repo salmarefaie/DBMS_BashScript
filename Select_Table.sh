@@ -20,38 +20,20 @@ if [[ -z $selectTable || $selectTable == [0-9]* || $selectTable == *['!''@#/$\"*
    echo "| Inavalid Table Name |" 
    echo " -------------------- "
 
-elif [ -f $selectTable ] ; then
-  select option in "Select All" "Select Row" "Select Record" "Select Column" "Tables Menu"
-  do
-    case $option in 
-    "Select All")
-        source ../../Select_All.sh
-       ;;
-    "Select Row")
-          source ../../Select_Row.sh
-         ;; fieldName
+while [[ -z $tableName || $tableName == [0-9]* || $tableName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $tableName == *" "* ]] 
+do
+   read -p "Inavalid Table Name, enter another name: " tableName
+done
 
 
-    "Select Record") fieldName
-          source ../../Select_Record.sh
-        ;;
+select choice in "Select all columns" "select specific column" "select columns where condition" 
+do
+	case $choice in
+		 "Select all columns") 
+			;;
+		"select specific columns")
 
-    "Select Column")
-          source ../../Select_Colomn.sh
-       ;;
-
-    "Tables Menu")
-       echo "  ----------------------- "
-		 echo " | Return To Tables Menu |"
-		 echo "  ----------------------- "
-		 break
-	     ;;
-    esac
-
-   done
-
-else
-   echo " --------------------- "
-   echo "| Table doesn't Exist |"
-   echo " --------------------- "
-fi
+			
+                         ;;
+		"select columns where condition") 
+			;;

@@ -31,7 +31,7 @@ numColumns=$(head -1 ./$insertTable"_metadata" | awk -F : '
 ' )
 
 col_arr=($(head -1 ./$insertTable"_metadata" | awk -F : '
-   {+
+   {
             fields=split($0, arr); 
             for (i=0;i<=fields;i++) print arr[i] 
    }

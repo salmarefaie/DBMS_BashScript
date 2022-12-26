@@ -54,12 +54,13 @@ elif [ -e $databaseName ] ;then
 		;;
 		
 		"Database Menu" )
-		 echo "  -------------------- "
-		 echo " | Your Database Menu |"
-		 echo "  -------------------- "
+		 echo "  ------------------------- "
+		 echo " | Return To Database Menu |"
+		 echo "  ------------------------- "
 		 cd ..
 		 break
 	    ;;
+
 	esac
 
     done 
