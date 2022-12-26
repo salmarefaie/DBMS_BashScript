@@ -26,15 +26,15 @@ elif [ -f $tableDelete ] ;then
 		    rm $tableDelete
 		    rm "$tableDelete"_metadata""
 		    echo " ------------------ "
-                    echo "| Table is deleted |"
-                    echo " ------------------ "
+          echo "| Table is deleted |"
+          echo " ------------------ "
 		    break
 	        ;;
 	        NO )	
 		    echo " ------ "
-                    echo "| Okay |"
-                    echo " ------ "
-                    break
+          echo "| Okay |"
+          echo " ------ "
+          break
 	        ;;
 	     
 	esac

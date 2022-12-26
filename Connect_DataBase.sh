@@ -21,7 +21,7 @@ elif [ -e $databaseName ] ;then
    echo "| Table Menu |"
    echo " ------------ "
 
-   select option in "Create Table" "List Tables" "Insert Table" "Select Table" "Update Table" "Drop Table" "Delete From Table" "Database Menu"
+   select option in "Create Table" "List Tables" "Insert Table" "Select Table" "Update Table" "Drop Table" "Delete Table" "Database Menu"
    do
 	case $option in
 	
@@ -49,8 +49,8 @@ elif [ -e $databaseName ] ;then
 		    source ../../Drop_Table.sh
 		;;
 		
-		"Delete From Table" )
-		    source ../../Delete_From_Database.sh
+		"Delete Table" )
+		    source ../../Delete_From_Table.sh
 		;;
 		
 		"Database Menu" )
@@ -59,8 +59,7 @@ elif [ -e $databaseName ] ;then
 		 echo "  -------------------- "
 		 cd ..
 		 break
-		 Database_Menu;
-	        ;;
+	    ;;
 	esac
 
     done 

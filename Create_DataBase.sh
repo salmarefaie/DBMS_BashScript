@@ -5,24 +5,20 @@ shopt -s extglob
 echo " -------------------"
 echo "| Database Creation |"
 echo " -------------------"
-read -p "Enter your database name: " databaseName
+read -p "Enter your database name: " databaseCreateName
 
 
-while [[ -z $databaseName || $databaseName == [0-9]* || $databaseName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $databaseName == *" "* ]] 
+while [[ -e $databaseCreateName ||-z $databaseCreateName || $databaseCreateName == [0-9]* || $databaseCreateName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $databaseCreateName == *" "* ]] 
 do
-   read -p "Inavalid Databse Name, enter another name: " databaseName
+   if [[ -e $databaseCreateName ]] ; then
+        read -p "Databse name already exist, enter another name: " databaseCreateName
+   else    
+        read -p "Inavalid Databse Name, enter another name: " databaseCreateName
+   fi
 done
 
-
-while [ -e $databaseName ]
-do
-   read -p "Databse name already exist, enter another name: " databaseName
-done
-
-mkdir $databaseName
+mkdir $databaseCreateName
 echo " --------------------- "
 echo "| Database is created |"
 echo " --------------------- "
-
-
-
+   
