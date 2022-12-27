@@ -10,7 +10,7 @@ ls -p | grep -v / | grep -v _
 
 read -p "Enter your table which you want to delete: " tableDelete
 
-if [[ -z $tableDelete || $tableDelete == [0-9]* || $tableDelete == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $tableDelete == *" "* ]] ;then
+if [[ -z $tableDelete || $tableDelete == [0-9]* || $tableDelete == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $tableDelete == *" "* ]] ;then
    echo "  -------------------- "
    echo "| Inavalid Table Name |"
    echo "  -------------------- "

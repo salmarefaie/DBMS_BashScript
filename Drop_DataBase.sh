@@ -10,7 +10,7 @@ ls -F | grep "/"
 
 read -p "Enter your database which you want to delete: " databaseDelete
 
-if [[ -z $databaseDelete || $databaseDelete == [0-9]* || $databaseDelete == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $databaseDelete == *" "* ]] ;then
+if [[ -z $databaseDelete || $databaseDelete == [0-9]* || $databaseDelete == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $databaseDelete == *" "* ]] ;then
    echo "  ---------------------- "
    echo "| Inavalid Databse Name |"
    echo "  ---------------------- "

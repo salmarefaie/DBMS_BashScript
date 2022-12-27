@@ -14,7 +14,7 @@ ls -p | grep -v / | grep -v _
 
 read -p "Enter your table name which you want to insert: " insertTable
 
-while [[ -z $insertTable || $insertTable == [0-9]* || $insertTable == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $insertTable == *" "* ]] 
+while [[ -z $insertTable || $insertTable == [0-9]* || $insertTable == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $insertTable == *" "* ]] 
 do
    read -p "Inavalid Table Name, enter another name to insert into table: " insertTable
 done

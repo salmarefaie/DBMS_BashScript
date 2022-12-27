@@ -9,7 +9,7 @@ ls -F | grep "/"
 read -p "Enter your database name: " databaseName
 
 
-if [[ -z $databaseName || $databaseName == [0-9]* || $databaseName == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $databaseName == *" "* ]] ;then
+if [[ -z $databaseName || $databaseName == [0-9]* || $databaseName == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $databaseName == *" "* ]] ;then
    echo "  ---------------------- "
    echo "| Inavalid Databse Name |"
    echo "  ---------------------- "
@@ -21,7 +21,7 @@ elif [ -e $databaseName ] ;then
    echo "| Table Menu |"
    echo " ------------ "
 
-   select option in "Create Table" "List Tables" "Insert Table" "Select Table" "Update Table" "Drop Table" "Delete Table" "Database Menu"
+   select option in "Create Table" "List Tables" "Insert Data Into Table" "Select Data From Table" "Update Data Into Table" "Drop Table" "Delete Data From Table" "Database Menu"
    do
 	case $option in
 	
@@ -33,15 +33,15 @@ elif [ -e $databaseName ] ;then
 		    source ../../List_Tables.sh
 	        ;;
 	        
-		"Insert Table" )  
+		"Insert Data Into Table" )  
 		    source ../../Insert_Table.sh
 		;;
 
-		"Select Table" )
+		"Select Data From Table" )
 		    source ../../Select_Table.sh
 		;;
 		
-		"Update Table" )
+		"Update Data Into Table" )
 		    source ../../Update_Table.sh
 		;;
 		
@@ -49,7 +49,7 @@ elif [ -e $databaseName ] ;then
 		    source ../../Drop_Table.sh
 		;;
 		
-		"Delete Table" )
+		"Delete Data From Table" )
 		    source ../../Delete_From_Table.sh
 		;;
 		

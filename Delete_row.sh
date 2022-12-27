@@ -31,7 +31,7 @@ colDeleteArr_type=($(tail -1 ./$DeleteTable"_metadata" | awk -F : '
 read -p "Enter name column which is selected row by it: " columnDelete
 
 # check regex column name
-if [[ -z $columnDelete|| $columnDelete == [0-9]* || $columnDelete == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $columnDelete == *" "* ]] ;then
+if [[ -z $columnDelete|| $columnDelete == [0-9]* || $columnDelete == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $columnDelete == *" "* ]] ;then
    echo " ---------------------- "
    echo "| Inavalid Column Name |" 
    echo " ---------------------- "
@@ -66,7 +66,7 @@ elif [[ ${col_DeleteArr[*]} =~ $columnDelete ]] ; then
 
   #  take value of column to select this row
   read -p "Enter value of column which is selected row by it: " column_deletevalue
-  if [[ -z $column_deletevalue || $column_deletevalue == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $column_deletevalue == *" "* ]] ;then
+  if [[ -z $column_deletevalue || $column_deletevalue == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $column_deletevalue == *" "* ]] ;then
    echo " ------------------------------- "
    echo "| Inavalid Value of Column Name |" 
    echo " ------------------------------- "
