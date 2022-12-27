@@ -22,7 +22,7 @@ numSelectColumns=$(head -1 ./$selectTable"_metadata" | awk -F : '
 read -p "Enter name column which is selected row by it: " column
 
 # check regex column name
-if [[ -z $column || $column == [0-9]* || $column == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $column == *" "* ]] ;then
+if [[ -z $column || $column = [0-9]* || $column = *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $column = *" "* ]] ;then
    echo " ---------------------- "
    echo "| Inavalid Column Name |" 
    echo " ---------------------- "
@@ -41,9 +41,11 @@ elif [[ ${col_selectArr[*]} =~ $column ]] ; then
       done
       
       # select colomn values
-      echo " ------ "
-      echo "| ${col_selectArr[index-1]} |"
-      echo " ------ "
+      echo " --------------------------- "
+      echo "| Data From Selected Column |"
+      echo " --------------------------- "
+      echo ${col_selectArr[index-1]} 
+      echo " "
       cat ./$selectTable | cut -d":" -f $index
       
 # column name m4 mwgood

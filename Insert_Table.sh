@@ -14,7 +14,7 @@ ls -p | grep -v / | grep -v _
 
 read -p "Enter your table name which you want to insert: " insertTable
 
-while [[ ! -f $insertTable || -z $insertTable || $insertTable == [0-9]* || $insertTable == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $insertTable == *" "* ]] 
+while [[ ! -f $insertTable || -z $insertTable || $insertTable = [0-9]* || $insertTable = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $insertTable = *" "* ]] 
 do
    if [[ ! -f $insertTable ]] ; then
       read -p "Table name doesn't exist, enter another name to insert into table: " insertTable
@@ -67,7 +67,7 @@ do
     
     #unique id
     if (( $i == 0 )) ;then
-       while ( cut -d":" -f1 ./$insertTable | grep $value)
+       while (( `cut -d":" -f1 ./$insertTable | grep $value | wc -w` > 0 ))
        do
           read -p " ${col_arr[i]} should be unique, please enter another value: " value
       done
@@ -86,8 +86,13 @@ do
      echo -n :${record_value[$i]} >> "./$insertTable"
   fi
 done
-
 echo >> "./$insertTable"
+
+echo " --------------- "
+echo "| Data is Added |"
+echo " --------------- "
+
+
 unset record_value[@]
 
 
