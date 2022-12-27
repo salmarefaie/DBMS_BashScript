@@ -46,9 +46,9 @@ elif [[ ${col_selectArr[*]} =~ $column ]] ; then
       do 
          if [[ "${col_selectArr[i-1]}" == "$column" ]] ; then
             index=$i
-            echo $index
+            # echo $index
             type=${colSelectArr_type[$index-1]}
-            echo $type
+            # echo $type
          fi
       done
       
@@ -64,7 +64,7 @@ elif [[ ${col_selectArr[*]} =~ $column ]] ; then
    ' ))
    rm column
 
-   #  take value of column to select this row
+   # take value of column to select this row
    read -p "Enter value of column which is selected row by it: " column_value
    
    # check type to take true value
@@ -88,7 +88,30 @@ elif [[ ${col_selectArr[*]} =~ $column ]] ; then
                   index_value=$i
             fi
       done
-      sed -n ''$index_value' p' ./$selectTable
+   
+   # el field elly hyt3rd mn row
+
+   read -p "Enter name column which is selected in the row: " field
+   
+   if [[ -z $field || $field == [0-9]* || $field == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $field == *" "* ]] ;then
+   echo " ---------------------- "
+   echo "| Inavalid Column Name |" 
+   echo " ---------------------- "
+
+   declare -i field_index         # num of column for table
+   
+   # check lw mwgood fy table metadata
+   elif [[ ${col_selectArr[*]} =~ $field ]] ; then
+
+      # bageeb num of column for table
+      for (( i=1; i <= $numSelectColumns ; i++ ))
+      do 
+         if [[ "${col_selectArr[i-1]}" == "$field" ]] ; then
+            field_index=$i
+         fi
+      done
+   fi
+     sed -n ''$index_value' p' ./$selectTable | cut -d":" -f $field_index
       
    else
     echo " ------------------------------- "
