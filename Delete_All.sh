@@ -10,9 +10,9 @@ do
   case $option in
     YES )	
         sed -i '1,$d' $DeleteTable
-        echo " ----------------------------------------"
-        echo "| All Data From $DeleteTable Table is Deleted |"
-        echo " ----------------------------------------"
+        echo " -------------------------------- "
+        echo "| All Data From Table is Deleted |"
+        echo " -------------------------------- "
         break 
         ;;
         NO )	

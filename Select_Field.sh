@@ -84,7 +84,7 @@ elif [[ ${col_selectArr[*]} =~ $column ]] ; then
             declare -i field_index         # num of column for table
             read -p "Enter name column which is selected in the row: " field
 
-            if [[ -z $field || $field == [0-9]* || $field == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $field == *" "* ]] ;then
+            if [[ -z $field || $field = [0-9]* || $field = *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $field = *" "* ]] ;then
                echo " ---------------------- "
                echo "| Inavalid Column Name |" 
                echo " ---------------------- "
@@ -99,9 +99,9 @@ elif [[ ${col_selectArr[*]} =~ $column ]] ; then
                      field_index=$i
                   fi
                done
-               echo " ------------------------ "
-               echo "| Data From Selected Row |"
-               echo " ------------------------ "
+               echo " -------------------------- "
+               echo "| Data From Selected Field |"
+               echo " -------------------------- "
                sed -n '1p' "$selectTable"_metadata"" | cut -d":" -f $field_index
                echo ""
                sed -n ''$row_num' p' ./$selectTable | cut -d":" -f $field_index
