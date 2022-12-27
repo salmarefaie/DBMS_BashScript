@@ -9,7 +9,7 @@ ls -F | grep "/"
 read -p "Enter your database name: " databaseName
 
 
-if [[ -z $databaseName || $databaseName == [0-9]* || $databaseName == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $databaseName == *" "* ]] ;then
+if [[ -z $databaseName || $databaseName = [0-9]* || $databaseName = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $databaseName = *" "* ]] ;then
    echo "  ---------------------- "
    echo "| Inavalid Databse Name |"
    echo "  ---------------------- "

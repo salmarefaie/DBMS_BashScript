@@ -2,11 +2,27 @@
 export LC_COLLATE=C 
 shopt -s extglob
 
-echo " --------------------------"
-echo "| All Data From $DeleteTable Table |"
-echo " --------------------------"
-echo " "
-sed -i '1d' "$DeleteTable"_metadata""
-echo "--------------------"
-sed -i '1,$d' $DeleteTable
-break 
+echo " -------------- "
+echo "| Are You Sure |"
+echo " -------------- "
+select option in YES NO
+do
+  case $option in
+    YES )	
+        sed -i '1,$d' $DeleteTable
+        echo " ----------------------------------------"
+        echo "| All Data From $DeleteTable Table is Deleted |"
+        echo " ----------------------------------------"
+        break 
+        ;;
+        NO )	
+        echo " ------ "
+        echo "| Okay |"
+        echo " ------ "
+        break
+        ;;
+        
+  esac
+done
+
+break

@@ -7,7 +7,7 @@ echo "| Table Creation |"
 echo " ---------------- "
 read -p "Enter your table name: " tableName
 
-while [[ $tableName = $databaseName || -f $tableName || -z $tableName || $tableName == [0-9]* || $tableName == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $tableName == *" "* ]] 
+while [[ $tableName = $databaseName || -f $tableName || -z $tableName || $tableName = [0-9]* || $tableName = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $tableName = *" "* ]] 
 do
    if [[ $tableName = $databaseName ]] ; then
       read -p "it is name of database, enter another name: " tableName
@@ -65,7 +65,7 @@ do
       read -p "enter the name of column num $num: " name
 
 
-      while [[ ${col_name[*]} =~ $name || -z $name || $name == [0-9]* || $name == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $name == *" "* ]] 
+      while [[ ${col_name[*]} =~ $name || -z $name || $name = [0-9]* || $name = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $name = *" "* ]] 
       do
       if [[ ${col_name[*]} =~ $name ]] ;then
          read -p "Column exist, enter name of column num $num: " name
@@ -99,9 +99,9 @@ do
    fi
 done
 
-echo >> "./$tableName"_metadata""
+echo >> "./$tableName"_metadata""  # next line
 
-# add name into metada file
+# add datatype into metada file
 for (( i=0 ; i < $number ; i++ ))
 do 
    if (( $i == $number-1 )) ; then
