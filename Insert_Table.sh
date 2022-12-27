@@ -14,21 +14,20 @@ ls -p | grep -v / | grep -v _
 
 read -p "Enter your table name which you want to insert: " insertTable
 
-while [[ -z $insertTable || $insertTable == [0-9]* || $insertTable == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $insertTable == *" "* ]] 
+while [[ ! -f $insertTable || -z $insertTable || $insertTable == [0-9]* || $insertTable == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $insertTable == *" "* ]] 
 do
-   read -p "Inavalid Table Name, enter another name to insert into table: " insertTable
-done
-
-until [ -f $insertTable ]
-do
-   read -p "Table name doesn't exist, enter another name to insert into table: " insertTable
+   if [[ ! -f $insertTable ]] ; then
+      read -p "Table name doesn't exist, enter another name to insert into table: " insertTable
+   else
+      read -p "Inavalid Table Name, enter another name to insert into table: " insertTable
+   fi
 done
 
 numColumns=$(head -1 ./$insertTable"_metadata" | awk -F : '
 {
       print NF
 }
-' )
+' ) 
 
 col_arr=($(head -1 ./$insertTable"_metadata" | awk -F : '
    {
@@ -54,27 +53,38 @@ do
     read -p "please enter ${col_arr[i]}: " value
 
     if [[ "${col_type[i]}" == "int" ]] ;then
-       until [[ $value == +([0-9]) ]]
+       while [[ $value == +([0]) || $value != +([0-9]) ]]
        do 
          read -p " you should enter integer value ,please enter ${col_arr[i]}: " value
        done
-    else
-       until [[ $value =~ [a-zA-Z][a-zA-Z0-9]* ]]
-       do 
+
+    elif [[ "${col_type[i]}" == "string" ]] ;then
+      while [[ -z $value || $value = [0-9]* || $value = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $value = *" "* ]]
+      do  
          read -p " you should enter string value ,please enter ${col_arr[i]}: " value
        done
     fi
-
+    
+    #unique id
+    if (( $i == 0 )) ;then
+       while ( cut -d":" -f1 ./$insertTable | grep $value)
+       do
+          read -p " ${col_arr[i]} should be unique, please enter another value: " value
+      done
+    fi
     record_value+=($value)
     
 done
 
 echo ${record_value[@]}
 
-
 for (( i=0 ; i < numColumns ; i++ ))
 do 
-  echo -n :${record_value[$i]} >> "./$insertTable"
+  if (( i==0 )) ; then
+     echo -n ${record_value[$i]} >> "./$insertTable"
+  else
+     echo -n :${record_value[$i]} >> "./$insertTable"
+  fi
 done
 
 echo >> "./$insertTable"

@@ -99,6 +99,7 @@ elif [[ ${col_DeleteArr[*]} =~ $columnDelete ]] ; then
        sed -i ''$line'd' ./$DeleteTable
    done
 Comment
+
   else
    echo " ------------------------------- "
    echo "| Value of Column doesn't Exist |"

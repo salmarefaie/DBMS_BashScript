@@ -21,7 +21,7 @@ if [[ -z $selectTable || $selectTable = [0-9]* || $selectTable = *['!''@#/$\"*{^
    echo " -------------------- "
 
 elif [ -f $selectTable ] ; then
-  select option in "Select All" "Select Row" "Select Record" "Select Column" "Tables Menu"
+  select option in "Select All" "Select Row" "Select Field" "Select Column" "Tables Menu"
   do
     case $option in 
     "Select All")
@@ -32,8 +32,8 @@ elif [ -f $selectTable ] ; then
          ;;
 
 
-    "Select Record")
-          source ../../Select_Record.sh
+    "Select Field")
+          source ../../Select_Field.sh
         ;;
 
     "Select Column")
@@ -42,9 +42,9 @@ elif [ -f $selectTable ] ; then
 
     "Tables Menu")
        echo "  ----------------------- "
-		 echo " | Return To Tables Menu |"
-		 echo "  ----------------------- "
-		 break
+	   echo " | Return To Tables Menu |"
+	   echo "  ----------------------- "
+		break
 	     ;;
     esac
 
