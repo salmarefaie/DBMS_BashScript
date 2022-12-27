@@ -31,15 +31,16 @@ colDeleteArr_type=($(tail -1 ./$DeleteTable"_metadata" | awk -F : '
 read -p "Enter name column which is selected row by it: " columnDelete
 
 # check regex column name
-if [[ -z $columnDelete|| $columnDelete == [0-9]* || $columnDelete == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $columnDelete == *" "* ]] ;then
+if [[ -z $columnDelete|| $columnDelete = [0-9]* || $columnDelete = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $columnDelete = *" "* ]] ;then
    echo " ---------------------- "
    echo "| Inavalid Column Name |" 
    echo " ---------------------- "
 
+
 declare -i index_delete        # num of column for table
-declare -i index_deletevalue   # num of row which is selected
+declare -i index_deletevalue   # num of row which is deleted
 declare -a search_deleterow    # array elly h7d feha values bta3t column da  
-declare -a index_value
+declare -a index_value         # 3shan lw 3ndy kza row 3ndohm nfs el condition (array feha index)
 
 # check lw mwgood fy table metadata
 elif [[ ${col_DeleteArr[*]} =~ $columnDelete ]] ; then
@@ -64,30 +65,40 @@ elif [[ ${col_DeleteArr[*]} =~ $columnDelete ]] ; then
 ' ))
   rm column
 
-  #  take value of column to select this row
+  #echo ${delete_row[*]}
+
+  #  take value of column to delete this row
   read -p "Enter value of column which is selected row by it: " column_deletevalue
-  if [[ -z $column_deletevalue || $column_deletevalue == *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $column_deletevalue == *" "* ]] ;then
+  if [[ -z $column_deletevalue || $column_deletevalue = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $column_deletevalue = *" "* ]] ;then
    echo " ------------------------------- "
    echo "| Inavalid Value of Column Name |" 
    echo " ------------------------------- "
   
-  # bageeb num of row and select it
+
+  
+  # bageeb num of row and delete it
   elif [[ ${delete_row[*]} =~ $column_deletevalue ]] ; then
-   for (( i=1; i <= ${#delete_row[*]} ; i++ ))
+   for (( i=0; i < ${#delete_row[*]} ; i++ ))
    do 
-         if [[ "${delete_row[i-1]}" == "$column_deletevalue" ]] ; then
-               index_deletevalue=$i
+         if [[ "${delete_row[i]}" == "$column_deletevalue" ]] ; then
+               (( index_deletevalue=$i+1 ))
+               echo $index_deletevalue
                index_value+=($index_deletevalue)
          fi
          
    done
-   
+
+   #echo ${index_value[*]}
+   #echo ${#index_value[*]}
+
    # bayyyyyyzaaaa
-   for (( i=1; i < ${#index_value[*]} ; i++))
+   <<Comment
+   for (( i=0; i < ${#index_value[*]} ; i++))
    do
-       sed -i ''${index_value[i]}'d' ./$DeleteTable
+      
+       sed -i ''$line'd' ./$DeleteTable
    done
-     
+Comment
   else
    echo " ------------------------------- "
    echo "| Value of Column doesn't Exist |"
