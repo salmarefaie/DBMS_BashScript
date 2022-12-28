@@ -41,10 +41,20 @@ elif [ -f $updateTable ] ; then
                     for (i=0;i<=fields;i++) print arr[i] 
         }
         ' ))
+        
 
         # take id or name or ....
         read -p "Enter name column which is updated row by it(condition): " column
 
+        exist_column=""
+        for element in ${col_selectArr[*]}
+        do 
+            if [ $element = $column ] ; then
+                exist_column=$element
+            fi
+        done
+
+       
         # check regex column name
         if [[ -z $column || $column = [0-9]* || $column = *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $column = *" "* ]] ;then
         echo " ---------------------- "
@@ -54,7 +64,7 @@ elif [ -f $updateTable ] ; then
         declare -i index         # num of column for table
 
         # check lw mwgood fy table metadata
-        elif [[ ${col_updateArr[*]} =~ $column ]] ; then
+        elif [[ $exist_column = $column ]] ; then
 
             # bageeb num of column for table
             for (( i=1; i <= $numUpdateColumns ; i++ ))
@@ -101,13 +111,21 @@ elif [ -f $updateTable ] ; then
                     declare -i field_index         # num of column for table
                     read -p "Enter name column which is updated in the row(set new value): " field
 
+                    exist_field=""
+                    for element in ${col_selectArr[*]}
+                    do 
+                        if [ $element = $field ] ; then
+                            exist_field=$element
+                        fi
+                    done
+
                     if [[ -z $field || $field == [0-9]* || $field == *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $field == *" "* ]] ;then
                     echo " ---------------------- "
                     echo "| Inavalid Column Name |" 
                     echo " ---------------------- "
 
                     # check lw mwgood fy table metadata
-                    elif [[ ${col_updateArr[*]} =~ $field ]] ; then
+                    elif [[ $exist_field = $field ]] ; then
 
                         # bageeb num of column for table
                     for (( i=1; i <= $numUpdateColumns ; i++ ))

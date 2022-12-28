@@ -21,6 +21,14 @@ numSelectColumns=$(head -1 ./$selectTable"_metadata" | awk -F : '
 # take id or name or ....
 read -p "Enter name column which is selected row by it: " column
 
+exist_column=""
+for element in ${col_selectArr[*]}
+do 
+    if [ $element = $column ] ; then
+        exist_column=$element
+    fi
+done
+
 # check regex column name
 if [[ -z $column || $column = [0-9]* || $column = *['!''@#/$\"*{^(+/|,;:~`.%&.=-]>[<?']* || $column = *" "* ]] ;then
    echo " ---------------------- "
@@ -30,7 +38,7 @@ if [[ -z $column || $column = [0-9]* || $column = *['!''@#/$\"*{^(+/|,;:~`.%&.=-
 declare -i index         # num of column for table
 
 # check lw mwgood fy table metadata
-elif [[ ${col_selectArr[*]} =~ $column ]] ; then
+elif [[ $exist_column = $column ]] ; then
 
       # bageeb num of column for table
       for (( i=1; i <= $numSelectColumns ; i++ ))
@@ -39,7 +47,7 @@ elif [[ ${col_selectArr[*]} =~ $column ]] ; then
             index=$i
          fi
       done
-      
+     
       # select colomn values
       echo " --------------------------- "
       echo "| Data From Selected Column |"
