@@ -82,11 +82,12 @@ elif [[ ${col_DeleteArr[*]} =~ $columnDelete ]] ; then
    do 
          if [[ "${delete_row[i]}" == "$column_deletevalue" ]] ; then
                (( index_deletevalue=$i+1 ))
-               echo $index_deletevalue
-               index_value+=($index_deletevalue)
+               #echo $index_deletevalue
+               #index_value+=($index_deletevalue)
          fi
          
    done
+   sed -i ''$index_deletevalue'd' ./$DeleteTable
 
    #echo ${index_value[*]}
    #echo ${#index_value[*]}
