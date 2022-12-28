@@ -67,7 +67,7 @@ do
     
     #unique id
     if (( $i == 0 )) ;then
-       while (( `cut -d":" -f1 ./$insertTable | grep $value | wc -w` > 0 ))
+       while (( `cut -d":" -f1 ./$insertTable | grep -x $value | wc -w` > 0 ))
        do
           read -p " ${col_arr[i]} should be unique, please enter another value: " value
       done

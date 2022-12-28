@@ -19,7 +19,7 @@ if [[ -z $updateTable || $updateTable = [0-9]* || $updateTable = *['!''@#/$\"*{^
    echo " -------------------- "
 
 elif [ -f $updateTable ] ; then
-            # metadata for table
+        # metadata for table
         col_updateArr=($(head -1 ./$updateTable"_metadata" | awk -F : '
         {
                     fields=split($0, arr); 
@@ -27,7 +27,6 @@ elif [ -f $updateTable ] ; then
         }
         ' ))
         
-
         # num of columns for table
         numUpdateColumns=$(head -1 ./$updateTable"_metadata" | awk -F : '
         {
@@ -115,7 +114,7 @@ elif [ -f $updateTable ] ; then
                     do 
                         if [[ "${col_updateArr[i-1]}" == "$field" ]] ; then
                             field_index=$i
-                            type=${colUpdateArr_type[$field_index-1]}
+                            type_new=${colUpdateArr_type[$field_index-1]}
                         fi
                     done
                     
@@ -128,23 +127,40 @@ elif [ -f $updateTable ] ; then
                     # check type to take true value
                     if [[ "$type_new" = "int" ]] ;then
 
-                        while [[ $column_value == +([0]) || $column_value != +([0-9]) ]]
+                        while [[ $new_value == +([0]) || $new_value != +([0-9]) ]]
                         do 
                         read -p " Invalid Value, you should enter an integer value(set new value): " new_value
                         done
 
 
                     elif [[ "$type_new" == "string" ]] ;then
-                        while [[ -z $column_value || $column_value = [0-9]* || $column_value = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $column_value = *" "* ]]
+                        while [[ -z $new_value || $new_value = [0-9]* || $new_value = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $new_value = *" "* ]]
                         do 
                         read -p " Invalid Value, you should enter a string value(set new value): " new_value
                         done
 
                     fi
-                    
-                    sed -i 's/'$old_value'/'$new_value'/g' ./$updateTable
-                    
 
+                
+
+                    if [[ "$new_value" = "$old_value" ]] ;then
+                        echo " ---------------------- "
+                        echo "| Data is Already Exist|"
+                        echo " ---------------------- "
+                    else
+                        # id unique
+                        if (( $field_index == 1 )) ;then
+                        while (( `cut -d":" -f1 ./$updateTable | grep -x $new_value | wc -w` > 0 ))
+                        do
+                        read -p " ID should be unique, please enter another value: " new_value
+                        done
+                        fi
+                        
+                        sed -i 's/'$old_value'/'$new_value'/g' ./$updateTable
+                        echo " ----------------- "
+                        echo "| Data is Updated |"
+                        echo " ----------------- "
+                    fi
 
                     # column name m4 mwgood
                     else
