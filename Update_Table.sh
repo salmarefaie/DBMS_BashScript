@@ -143,7 +143,7 @@ elif [ -f $updateTable ] ; then
                     read -p "Enter value of column which is updated in the row(set new value): " new_value
 
                     # check type to take true value
-                    if [[ "$type_new" = "int" ]] ;then
+                    if [[ "$type_new" == "int" ]] ;then
 
                         while [[ $new_value == +([0]) || $new_value != +([0-9]) ]]
                         do 
