@@ -26,6 +26,7 @@ elif [ -f $updateTable ] ; then
                     for (i=0;i<=fields;i++) print arr[i] 
         }
         ' ))
+        
 
         # num of columns for table
         numUpdateColumns=$(head -1 ./$updateTable"_metadata" | awk -F : '
@@ -95,7 +96,7 @@ elif [ -f $updateTable ] ; then
                     }
                     ' "./$updateTable"` 
             fi
-
+             
             if [[ ! -z $row_num ]] ; then
 
                     declare -i field_index         # num of column for table
@@ -109,41 +110,39 @@ elif [ -f $updateTable ] ; then
                     # check lw mwgood fy table metadata
                     elif [[ ${col_updateArr[*]} =~ $field ]] ; then
 
-                    # bageeb num of column for table
+                        # bageeb num of column for table
                     for (( i=1; i <= $numUpdateColumns ; i++ ))
                     do 
-                        if [[ "${col_updeteArr[i-1]}" == "$field" ]] ; then
+                        if [[ "${col_updateArr[i-1]}" == "$field" ]] ; then
                             field_index=$i
-                            type_new=${colUpdateArr_type[index-1]}
-
+                            type=${colUpdateArr_type[$field_index-1]}
                         fi
                     done
+                    
+                    old_value=`sed -n ''$row_num' p' ./$updateTable | cut -d":" -f $field_index`
+                    
 
-                    echo $field_index
-                    old_value=`sed -n ''$row_num' p' ./$updateTable`
-                    echo $old_value
+                    # take value of column to select this row
+                    read -p "Enter value of column which is updated in the row(set new value): " new_value
 
-                        # take value of column to select this row
-                        read -p "Enter value of column which is updated in the row(set new value): " new_value
+                    # check type to take true value
+                    if [[ "$type_new" = "int" ]] ;then
 
-                        # check type to take true value
-                        if [[ "$type_new" = "int" ]] ;then
-
-                            while [[ $column_value == +([0]) || $column_value != +([0-9]) ]]
-                            do 
-                            read -p " Invalid Value, you should enter an integer value(set new value): " new_value
-                            done
+                        while [[ $column_value == +([0]) || $column_value != +([0-9]) ]]
+                        do 
+                        read -p " Invalid Value, you should enter an integer value(set new value): " new_value
+                        done
 
 
-                        elif [[ "$type_new" == "string" ]] ;then
-                            while [[ -z $column_value || $column_value = [0-9]* || $column_value = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $column_value = *" "* ]]
-                            do 
-                            read -p " Invalid Value, you should enter a string value(set new value): " new_value
-                            done
+                    elif [[ "$type_new" == "string" ]] ;then
+                        while [[ -z $column_value || $column_value = [0-9]* || $column_value = *['!''@#/$\"*{^({+/|,};:~)`.%&.=-]>[<?']* || $column_value = *" "* ]]
+                        do 
+                        read -p " Invalid Value, you should enter a string value(set new value): " new_value
+                        done
 
-                        fi
-                        
-                        #sed -i 's/'$old'/'$new_value'/g' $table_name
+                    fi
+                    
+                    sed -i 's/'$old_value'/'$new_value'/g' ./$updateTable
                     
 
 
