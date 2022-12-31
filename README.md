@@ -1,5 +1,6 @@
 # Database_shellScript
 <a name="desc"></a>
-> ### Database :
->       - create database
->       - half mode
+<a name="desc"></a>
+## Database
+> - create database
+> - drop database
