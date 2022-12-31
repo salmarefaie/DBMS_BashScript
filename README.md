@@ -4,8 +4,10 @@
 
 <a name="desc"></a>
 ## DataBase Menu
-> Create DataBase
-> List Databases
-> Drop Database
-> Connect to Database
-> Exit 
+> - Create DataBase
+> - List Databases
+> - Drop Database
+> - Connect to Database
+> - Exit 
+
+
