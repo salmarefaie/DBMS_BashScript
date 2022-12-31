@@ -1,5 +1,11 @@
 # Database_shellScript
-<a name="desc"></a>
-<a name="desc"></a>
 ## Description
-> It is a simple database engine project to make simple operation.
+> It is a simple database engine project to make simple operations with databases and tables. 
+
+<a name="desc"></a>
+## DataBase Menu
+> Create DataBase
+> List Databases
+> Drop Database
+> Connect to Database
+> Exit 
