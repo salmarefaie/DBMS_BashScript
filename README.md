@@ -20,4 +20,7 @@
 > - Update Data in Table
 > - Return To Main Menu
 
+## Start Project 
+>       - full mode
+
 
