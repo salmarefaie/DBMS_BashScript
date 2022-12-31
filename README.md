@@ -10,4 +10,14 @@
 > - Connect to Database
 > - Exit 
 
+## Table Menu
+> - Create Table
+> - List Tables
+> - Drop Table
+> - Insert Data Into Table
+> - Select Data From Table
+> - Delete Data From Table
+> - Update Data in Table
+> - Return To Main Menu
+
 
