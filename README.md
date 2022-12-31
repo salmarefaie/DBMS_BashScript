@@ -20,7 +20,11 @@
 > - Update Data in Table
 > - Return To Main Menu
 
+<a name="desc"></a>
 ## Start Project 
->       - full mode
+> - At first, clone the project
+>       - git clone https://github.com/salmarefaie/Database_shellScript.git
+> - Then, start the project
+>       - . ./project.sh
 
 
