@@ -72,7 +72,7 @@ elif [[ $exist_column = $column ]] ; then
                if($'$index'=='$column_value'){print NR}
             }
             ' "./$selectTable"` 
-         
+
          if [[ ! -z $row_num ]] ; then
           sed -n ''$row_num'p' ./$selectTable
 
@@ -94,7 +94,9 @@ elif [[ $exist_column = $column ]] ; then
             }
             ' "./$selectTable"` 
          
-         
+         echo $row_num
+         IFs
+
          if [[ ! -z $row_num ]] ; then
             echo " ------------------------ "
             echo "| Data From Selected Row |"

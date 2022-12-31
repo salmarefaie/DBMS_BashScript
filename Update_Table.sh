@@ -47,7 +47,7 @@ elif [ -f $updateTable ] ; then
         read -p "Enter name column which is updated row by it(condition): " column
 
         exist_column=""
-        for element in ${col_selectArr[*]}
+        for element in ${col_updateArr[*]}
         do 
             if [ $element = $column ] ; then
                 exist_column=$element
@@ -112,7 +112,7 @@ elif [ -f $updateTable ] ; then
                     read -p "Enter name column which is updated in the row(set new value): " field
 
                     exist_field=""
-                    for element in ${col_selectArr[*]}
+                    for element in ${col_updateArr[*]}
                     do 
                         if [ $element = $field ] ; then
                             exist_field=$element
