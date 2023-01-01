@@ -21,6 +21,10 @@
 > - Update Data in Table
 > - Return To Main Menu
 
+## TSupport Variables
+> - Integer
+> - String
+
 <a name="desc"></a>
 ## Start Project 
 - At first, clone the project
