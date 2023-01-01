@@ -21,7 +21,7 @@
 > - Update Data in Table
 > - Return To Main Menu
 
-## TSupport Variables
+## Support Variables
 > - Integer
 > - String
 
