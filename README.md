@@ -28,7 +28,7 @@
 <a name="desc"></a>
 ## Start Project 
 - At first, clone the project
->      git clone https://github.com/salmarefaie/Database_shellScript.git
+>      https://github.com/salmarefaie/DBMS_BashScript.git
 - Then, start the project
 >      . ./project.sh
 
